@@ -80,7 +80,7 @@ public class IntentNavigationEntry extends NavigationEntry<Intent> {
         private int code = -1;
         private int originatorFragmentId = -1;
 
-        private Builder(Navigator navigator, Intent target) {
+        public Builder(Navigator navigator, Intent target) {
             super(navigator, target);
         }
 

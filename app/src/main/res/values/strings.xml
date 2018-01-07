@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">KogiAplicantTest</string>
+
+    <!-- Splash -->
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="splash_content">KOGI\nFEED</string>
+
+    <!-- Home -->
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- Navigation Drawer -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_instagram">Instagram</string>
+    <string name="navigation_drawer_twitter">Twitter</string>
+    <string name="navigation_drawer_preferences">Settings</string>
+
+    <!-- Menu -->
+    <string name="action_settings">Settings</string>
 </resources>

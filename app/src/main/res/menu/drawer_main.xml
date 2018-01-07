@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/drawer_main_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_instagram"
+            android:icon="@drawable/ic_menu_glyph"
+            android:title="@string/navigation_drawer_instagram" />
+        <item
+            android:id="@+id/nav_twitter"
+            android:icon="@drawable/ic_twitter_logo_blue"
+            android:title="@string/navigation_drawer_twitter" />
+    </group>
+
+    <group
+        android:id="@+id/drawer_settings_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_settings"
+            android:title="@string/navigation_drawer_preferences" />
+    </group>
+
+</menu>

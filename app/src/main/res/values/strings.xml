@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">KogiAplicantTest</string>
 
+    <!-- Dialogs -->
+    <string name="dialog_positive_opt">OK</string>
+    <string name="dialog_negative_opt">Cancel</string>
+
     <!-- Splash -->
     <string name="title_activity_splash">SplashActivity</string>
     <string name="splash_content">KOGI\nFEED</string>
@@ -17,4 +21,20 @@
 
     <!-- Menu -->
     <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preferences -->
+
+    <!-- Session preferences -->
+    <string name="pref_title_accounts">Accounts</string>
+    <string name="pref_title_session_logout_instagram">Instagram Log out</string>
+    <string name="pref_session_summary_logout_instagram">Close session from Instagram</string>
+    <string name="pref_title_session_logout_twitter">Twitter Log out</string>
+    <string name="pref_session_summary_logout_twitter">Close session from Twitter</string>
+    <string name="pref_title_session_login_instagram">Instagram Log in</string>
+    <string name="pref_session_summary_login_instagram">Have an Instagram account already?</string>
+    <string name="pref_title_session_login_twitter">Twitter Log in</string>
+    <string name="pref_session_summary_login_twitter">Have an Twitter account already?</string>
+    <string name="pref_dialog_title">Log out</string>
+    <string name="pref_dialog_message">Are you sure? Logging out will remove all %1$s data from this device</string>
 </resources>

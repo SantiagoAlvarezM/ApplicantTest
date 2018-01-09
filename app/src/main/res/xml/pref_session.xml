@@ -1,0 +1,17 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:capitalize="words"
+        android:defaultValue="0"
+        android:key="@string/pref_key_account_instagram"
+        android:summary="@string/pref_session_summary_logout_instagram"
+        android:title="@string/pref_title_session_logout_instagram" />
+
+    <Preference
+        android:capitalize="words"
+        android:defaultValue="0"
+        android:key="@string/pref_key_account_twitter"
+        android:summary="@string/pref_session_summary_logout_twitter"
+        android:title="@string/pref_title_session_logout_twitter" />
+
+</PreferenceScreen>

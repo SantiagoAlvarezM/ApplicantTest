@@ -9,17 +9,26 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import dagger.android.AndroidInjection
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import me.santiagoalvarez.kogiaplicanttest.KogiApplication
 import me.santiagoalvarez.kogiaplicanttest.R
+import me.santiagoalvarez.kogiaplicanttest.navigation.IntentNavigationEntry
+import me.santiagoalvarez.kogiaplicanttest.navigation.Navigator
+import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivity
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     companion object {
         fun createIntent(context: Context): Intent {
             return Intent(context, MainActivity::class.java)
         }
     }
+
+    @Inject lateinit var navigator: Navigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +73,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_settings -> {
-
+                val entry = IntentNavigationEntry.Builder(navigator, SettingsActivity.createIntent(this))
+                        .build()
+                navigator.navigateTo(entry)
             }
         }
 

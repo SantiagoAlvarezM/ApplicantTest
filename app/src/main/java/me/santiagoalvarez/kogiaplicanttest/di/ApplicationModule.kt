@@ -1,24 +1,25 @@
 package me.santiagoalvarez.kogiaplicanttest.di
 
-import android.content.Context
-import dagger.Binds
+import android.app.Application
+import android.util.Log
+import com.twitter.sdk.android.core.DefaultLogger
+import com.twitter.sdk.android.core.TwitterAuthConfig
+import com.twitter.sdk.android.core.TwitterConfig
 import dagger.Module
-import dagger.android.support.AndroidSupportInjectionModule
-import me.santiagoalvarez.kogiaplicanttest.KogiApplication
-import me.santiagoalvarez.kogiaplicanttest.home.MainActivity
-import dagger.android.ContributesAndroidInjector
-
+import dagger.Provides
+import javax.inject.Singleton
 
 
 /**
  * @author santiagoalvarez
  */
-@Module(includes = [AndroidSupportInjectionModule::class])
-abstract class ApplicationModule {
+@Module
+class ApplicationModule {
 
-    @Binds
-    abstract fun provideContext(application: KogiApplication): Context
-
-    @ContributesAndroidInjector
-    internal abstract fun contributeActivityInjector(): MainActivity
+    @Provides
+    fun providesTwitterConfig(application: Application): TwitterConfig
+            = TwitterConfig.Builder(application)
+            .logger(DefaultLogger(Log.DEBUG))
+            .debug(true)
+            .build()
 }

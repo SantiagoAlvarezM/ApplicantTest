@@ -76,8 +76,19 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
+    // Anko
+    compile "org.jetbrains.anko:anko-commons:$anko_version" // Commons
+    compile "org.jetbrains.anko:anko-support-v4-commons:$anko_version"
+    compile "org.jetbrains.anko:anko-appcompat-v7-commons:$anko_version"
+    compile "org.jetbrains.anko:anko-design:$anko_version" // Design
+    compile "org.jetbrains.anko:anko-design-coroutines:$anko_version"
+
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+
+    // Twitter
+    implementation "com.twitter.sdk.android:twitter-core:$twitter_version"
+    implementation "com.twitter.sdk.android:tweet-ui:$twitter_version"
 
     // Test dependencies
     testImplementation "junit:junit:$junit_version"

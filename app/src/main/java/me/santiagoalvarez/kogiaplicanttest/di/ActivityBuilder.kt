@@ -14,9 +14,11 @@ import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivityModule
 @Module
 abstract class ActivityBuilder {
 
+    @ActivityScoped
     @ContributesAndroidInjector(modules = [MainActivityModule::class])
     internal abstract fun bindMainActivity(): MainActivity
 
+    @ActivityScoped
     @ContributesAndroidInjector(modules = [SettingsActivityModule::class])
     internal abstract fun bindSettingsActivity(): SettingsActivity
 }

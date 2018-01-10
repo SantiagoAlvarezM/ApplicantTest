@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">KogiAplicantTest</string>
 
+    <!-- General -->
+    <string name="tw__login_btn_txt">Log in</string>
+
     <!-- Dialogs -->
     <string name="dialog_positive_opt">OK</string>
     <string name="dialog_negative_opt">Cancel</string>
@@ -37,4 +40,10 @@
     <string name="pref_session_summary_login_twitter">Have an Twitter account already?</string>
     <string name="pref_dialog_title">Log out</string>
     <string name="pref_dialog_message">Are you sure? Logging out will remove all %1$s data from this device</string>
+
+    <!-- Twitter Login -->
+    <string name="title_activity_twitter_login">TwitterLoginActivity</string>
+    <string name="twitter_login_body">Log in to Twiter.</string>
+    <string name="twitter_login_username_hint">Phone, email or username</string>
+    <string name="twitter_login_password_hint">Password</string>
 </resources>

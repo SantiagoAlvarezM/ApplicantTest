@@ -29,4 +29,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.AppBarOverlay.Twitter" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorAccent">@color/twitter_primary</item>
+        <item name="android:textColorPrimary">@color/twitter_secondary</item>
+        <item name="android:textColorSecondary">@color/dark_gray</item>
+    </style>
+
 </resources>

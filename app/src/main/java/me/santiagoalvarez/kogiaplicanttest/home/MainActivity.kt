@@ -6,18 +6,16 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import dagger.android.AndroidInjection
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import me.santiagoalvarez.kogiaplicanttest.KogiApplication
 import me.santiagoalvarez.kogiaplicanttest.R
 import me.santiagoalvarez.kogiaplicanttest.navigation.IntentNavigationEntry
 import me.santiagoalvarez.kogiaplicanttest.navigation.Navigator
 import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivity
+import me.santiagoalvarez.kogiaplicanttest.twitter.login.TwitterLoginActivity
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -70,12 +68,12 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
 
             }
             R.id.nav_twitter -> {
-
+                IntentNavigationEntry.Builder(navigator, TwitterLoginActivity.createIntent(this))
+                        .navigate()
             }
             R.id.nav_settings -> {
-                val entry = IntentNavigationEntry.Builder(navigator, SettingsActivity.createIntent(this))
-                        .build()
-                navigator.navigateTo(entry)
+                IntentNavigationEntry.Builder(navigator, SettingsActivity.createIntent(this))
+                        .navigate()
             }
         }
 

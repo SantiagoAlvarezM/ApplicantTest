@@ -32,6 +32,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="me.santiagoalvarez.kogiaplicanttest.home.MainActivity" />
         </activity>
+        <activity
+            android:name=".twitter.login.TwitterLoginActivity"
+            android:label="@string/title_activity_twitter_login"
+            android:parentActivityName=".home.MainActivity"
+            android:theme="@style/AppTheme.AppBarOverlay.Twitter"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.santiagoalvarez.kogiaplicanttest.home.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@ package me.santiagoalvarez.kogiaplicanttest.common.base
  */
 interface BasePresenter<T> {
 
-    fun bindView(view: T)
+    fun takeView(view: T)
 
     fun dropView()
 }

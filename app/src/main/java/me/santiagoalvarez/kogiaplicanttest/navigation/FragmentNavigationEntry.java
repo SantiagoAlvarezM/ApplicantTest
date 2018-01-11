@@ -124,7 +124,7 @@ public class FragmentNavigationEntry extends NavigationEntry<Fragment> {
         private boolean clearHistory;
         private Integer containerId;
 
-        Builder(Navigator navigator, Fragment target) {
+        public Builder(Navigator navigator, Fragment target) {
             super(navigator, target);
         }
 

@@ -1,18 +1,19 @@
 package me.santiagoalvarez.kogiaplicanttest.twitter.login
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.common.base.Preconditions
 import com.twitter.sdk.android.core.Callback
-import com.twitter.sdk.android.core.Result
-import com.twitter.sdk.android.core.TwitterException
 import com.twitter.sdk.android.core.TwitterSession
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_twitter_login.*
 import me.santiagoalvarez.kogiaplicanttest.R
 import me.santiagoalvarez.kogiaplicanttest.di.ActivityScoped
-import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.design.snackbar
 import javax.inject.Inject
 
 
@@ -22,30 +23,33 @@ import javax.inject.Inject
 @ActivityScoped
 class TwitterLoginFragment @Inject constructor() : DaggerFragment(), TwitterLoginContract.View {
 
+    interface OnTwitterLoginListener {
+        fun onLoginSuccess()
+    }
+
     @Inject lateinit var presenter: TwitterLoginContract.Presenter
+    private var loginListener: OnTwitterLoginListener? = null
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_twitter_login, container, false)
+    }
 
-        val view = inflater.inflate(R.layout.fragment_twitter_login, container, false)
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        Preconditions.checkArgument(context is OnTwitterLoginListener, "activity must implement OnTwitterLoginListener")
+        loginListener = context as OnTwitterLoginListener
+    }
 
-        login_button.callback = object : Callback<TwitterSession>() {
-
-            override fun success(result: Result<TwitterSession>) {
-                toast("success")
-            }
-
-            override fun failure(exception: TwitterException) {
-                toast("failure")
-            }
-        }
-
-        return view
+    override fun onDetach() {
+        super.onDetach()
+        loginListener = null
     }
 
     override fun onResume() {
         super.onResume()
-        presenter.bindView(this)
+        presenter.takeView(this)
     }
 
     override fun onDestroy() {
@@ -53,15 +57,20 @@ class TwitterLoginFragment @Inject constructor() : DaggerFragment(), TwitterLogi
         presenter.dropView()
     }
 
-    override fun showLoadingIndicator(active: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        login_button.onActivityResult(requestCode, resultCode, data)
     }
 
-    override fun showLoginFailMessage() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun setCallback(callback: Callback<TwitterSession>) {
+        login_button.callback = callback
     }
 
-    override fun navigate() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onLoginFail() {
+        snackbar(iVTwitterLoginLogo.rootView, R.string.pref_dialog_message).show()
+    }
+
+    override fun onLoginSuccess() {
+        loginListener?.onLoginSuccess()
     }
 }

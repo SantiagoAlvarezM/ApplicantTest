@@ -12,21 +12,19 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import me.santiagoalvarez.kogiaplicanttest.R
 import me.santiagoalvarez.kogiaplicanttest.auth.AccountType
+import me.santiagoalvarez.kogiaplicanttest.common.base.BaseActivity
 import me.santiagoalvarez.kogiaplicanttest.navigation.IntentNavigationEntry
 import me.santiagoalvarez.kogiaplicanttest.navigation.Navigator
 import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivity
 import me.santiagoalvarez.kogiaplicanttest.twitter.feed.TwitterLandingActivity
-import javax.inject.Inject
 
-class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     companion object {
         fun createIntent(context: Context): Intent {
             return Intent(context, MainActivity::class.java)
         }
     }
-
-    @Inject lateinit var navigator: Navigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

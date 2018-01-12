@@ -3,7 +3,6 @@ package me.santiagoalvarez.kogiaplicanttest.di
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import me.santiagoalvarez.kogiaplicanttest.home.MainActivity
-import me.santiagoalvarez.kogiaplicanttest.home.MainActivityModule
 import me.santiagoalvarez.kogiaplicanttest.init.splash.SplashActivity
 import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivity
 import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivityModule
@@ -22,7 +21,7 @@ abstract class ActivityBuilder {
     internal abstract fun bindSplashActivity(): SplashActivity
 
     @ActivityScoped
-    @ContributesAndroidInjector(modules = [MainActivityModule::class])
+    @ContributesAndroidInjector
     internal abstract fun bindMainActivity(): MainActivity
 
     @ActivityScoped

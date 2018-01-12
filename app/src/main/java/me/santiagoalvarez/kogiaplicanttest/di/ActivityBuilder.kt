@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import me.santiagoalvarez.kogiaplicanttest.home.MainActivity
 import me.santiagoalvarez.kogiaplicanttest.home.MainActivityModule
+import me.santiagoalvarez.kogiaplicanttest.init.splash.SplashActivity
 import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivity
 import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivityModule
 import me.santiagoalvarez.kogiaplicanttest.twitter.login.TwitterLoginActivity
@@ -15,6 +16,10 @@ import me.santiagoalvarez.kogiaplicanttest.twitter.login.TwitterLoginModule
  */
 @Module
 abstract class ActivityBuilder {
+
+    @ActivityScoped
+    @ContributesAndroidInjector
+    internal abstract fun bindSplashActivity(): SplashActivity
 
     @ActivityScoped
     @ContributesAndroidInjector(modules = [MainActivityModule::class])

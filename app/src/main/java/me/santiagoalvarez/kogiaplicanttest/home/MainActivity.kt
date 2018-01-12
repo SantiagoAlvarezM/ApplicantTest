@@ -6,16 +6,16 @@ import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.view.Menu
 import android.view.MenuItem
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import me.santiagoalvarez.kogiaplicanttest.R
+import me.santiagoalvarez.kogiaplicanttest.auth.AccountType
 import me.santiagoalvarez.kogiaplicanttest.navigation.IntentNavigationEntry
 import me.santiagoalvarez.kogiaplicanttest.navigation.Navigator
 import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivity
-import me.santiagoalvarez.kogiaplicanttest.twitter.login.TwitterLoginActivity
+import me.santiagoalvarez.kogiaplicanttest.twitter.feed.TwitterLandingActivity
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -50,25 +50,14 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_settings -> return true
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_instagram -> {
-
+                TODO("not implemented")
             }
             R.id.nav_twitter -> {
-                IntentNavigationEntry.Builder(navigator, TwitterLoginActivity.createIntent(this))
+                IntentNavigationEntry.Builder(navigator, TwitterLandingActivity.createIntent(this))
+                        .withLoginCheck(AccountType.TWITTER)
                         .navigate()
             }
             R.id.nav_settings -> {

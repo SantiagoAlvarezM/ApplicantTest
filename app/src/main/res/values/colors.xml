@@ -11,4 +11,5 @@
     <color name="light_gray">#AAB8C2</color>
     <color name="extra_light_gray">#E1E8ED</color>
     <color name="black_overlay">#66000000</color>
+    <color name="splash_text_color">#33b5e5</color>
 </resources>

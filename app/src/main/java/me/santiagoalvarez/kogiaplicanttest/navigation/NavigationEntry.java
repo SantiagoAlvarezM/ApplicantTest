@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 
 import java.io.Serializable;
 
+import me.santiagoalvarez.kogiaplicanttest.auth.AccountType;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -24,7 +26,8 @@ public abstract class NavigationEntry<T> implements Parcelable {
     CustomAnimations animations;
     private final boolean home;
     private final String title;
-    private final Boolean loginRequired;
+    private final CustomLogin loginRequired;
+    private final boolean sticky;
 
     /**
      * private full options constructor.  Exposes all of the available information within the event.
@@ -37,13 +40,15 @@ public abstract class NavigationEntry<T> implements Parcelable {
         this.title = builder.title;
         this.home = builder.home;
         this.loginRequired = builder.loginRequired;
+        this.sticky = builder.sticky;
     }
 
     protected NavigationEntry(Parcel parcelIn, T target) {
         home = (boolean) parcelIn.readValue(null);
         title = (String) parcelIn.readValue(null);
         animations = (CustomAnimations) parcelIn.readValue(null);
-        loginRequired = (Boolean) parcelIn.readValue(null);
+        loginRequired = (CustomLogin) parcelIn.readValue(null);
+        sticky = (boolean) parcelIn.readValue(null);
         this.target = target;
     }
 
@@ -74,21 +79,23 @@ public abstract class NavigationEntry<T> implements Parcelable {
      *
      * @return if login check is enabled.
      */
-    public boolean isLoginRequired() {
-        Boolean loginRequiredLocal = this.loginRequired;
+    public boolean isLoginRequired(AccountType accountType) {
+        CustomLogin loginRequiredLocal = this.loginRequired;
         if (loginRequiredLocal == null) {
             try {
                 Class<?> internalTargetClass = getInternalTargetClass();
-                if (internalTargetClass != null) {
-                    loginRequiredLocal = internalTargetClass.getAnnotation(AuthenticationRequired.class) != null;
-                } else {
-                    loginRequiredLocal = false;
+                AccountType[] accounts = internalTargetClass.getAnnotation(AuthenticationRequired.class).accounts();
+                for (AccountType account : accounts) {
+                    if (account == accountType) {
+                        return true;
+                    }
                 }
-            } catch (ClassNotFoundException e) {
-                loginRequiredLocal = false;
+                return false;
+            } catch (Exception e) {
+                loginRequiredLocal = new CustomLogin(accountType, false);
             }
         }
-        return loginRequiredLocal;
+        return loginRequiredLocal.loginRequired;
     }
 
     @Override
@@ -102,6 +109,7 @@ public abstract class NavigationEntry<T> implements Parcelable {
         parcel.writeValue(title);
         parcel.writeValue(animations);
         parcel.writeValue(loginRequired);
+        parcel.writeValue(sticky);
     }
 
     /**
@@ -109,6 +117,26 @@ public abstract class NavigationEntry<T> implements Parcelable {
      * @throws ClassNotFoundException
      */
     protected abstract Class<?> getInternalTargetClass() throws ClassNotFoundException;
+
+    public boolean isSticky() {
+        return sticky;
+    }
+
+    /**
+     * custom login type holder
+     */
+    public static class CustomLogin implements Serializable {
+
+        private static final long serialVersionUID = -7366758632864960252L;
+
+        final AccountType accountType;
+        final boolean loginRequired;
+
+        public CustomLogin(AccountType accountType, boolean loginRequired) {
+            this.accountType = accountType;
+            this.loginRequired = loginRequired;
+        }
+    }
 
     /**
      * The custom transition animation configuration class.
@@ -160,7 +188,8 @@ public abstract class NavigationEntry<T> implements Parcelable {
         private String title = null;
         private boolean home = false;
         protected Navigator navigator;
-        private Boolean loginRequired;
+        private CustomLogin loginRequired;
+        private boolean sticky = false;
 
         Builder(Navigator navigator, P target) {
             this.target = checkNotNull(target);
@@ -193,8 +222,8 @@ public abstract class NavigationEntry<T> implements Parcelable {
          *
          * @return if login check is enabled.
          */
-        public T withLoginCheck() {
-            this.loginRequired = true;
+        public T withLoginCheck(AccountType accountType) {
+            this.loginRequired = new CustomLogin(accountType, true);
             return self();
         }
 
@@ -204,6 +233,20 @@ public abstract class NavigationEntry<T> implements Parcelable {
          */
         public T withAnimations(CustomAnimations animations) {
             this.animations = animations;
+            return self();
+        }
+
+        /**
+         * Sets the NavigationEntry as sticky.
+         * This flag avoid the Navigator removing the NavigationEntry
+         * when executed with {@link Navigator#executePendingNavigation(String)},
+         * unless it is forced to be removed or kept during the execution.
+         * If not set, this flag defaults to false.
+         *
+         * @return the builder instance
+         */
+        public T sticky() {
+            this.sticky = true;
             return self();
         }
 

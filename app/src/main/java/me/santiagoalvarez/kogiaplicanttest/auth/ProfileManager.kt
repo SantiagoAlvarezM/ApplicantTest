@@ -1,31 +1,18 @@
 package me.santiagoalvarez.kogiaplicanttest.auth
 
-import com.twitter.sdk.android.core.Callback
+import com.twitter.sdk.android.core.TwitterCore
 import com.twitter.sdk.android.core.TwitterSession
+import javax.inject.Inject
 
 /**
  * Manager in charge of interaction with Instagram & Twitter services
  * @author santiagoalvarez
  */
-interface ProfileManager {
+class ProfileManager @Inject constructor() {
 
     /**
      * Get the [TwitterSession]
      */
     fun fetchTwitterSession(): TwitterSession
-
-    /**
-     * Get the User email from [TwitterAuthClient]
-     *
-     * @param twitterSession
-     */
-    fun fetchTwitterEmail(twitterSession: TwitterSession): Callback<String>
-
-    /**
-     * Query Authentication state for given [AccountType]
-     *
-     * @param accountType
-     * @return [Boolean] true if is authenticated, false otherwise
-     */
-    fun isUserAuthenticated(accountType: AccountType): Boolean
+            = TwitterCore.getInstance().sessionManager.activeSession
 }

@@ -39,7 +39,11 @@
     <string name="pref_dialog_message">Are you sure? Logging out will remove all %1$s data from this device</string>
 
     <!-- Twitter Login -->
-    <string name="title_activity_twitter_login">TwitterLoginActivity</string>
+    <string name="title_activity_twitter_login">Log in</string>
     <string name="twitter_login_body">See what\'s happening\nin the world right now.</string>
     <string name="twitter_login_fail_general">Something is not right… we apologize for it. Please try again later.</string>
+    <string name="twitter_login_success">Success, you are logged in.</string>
+
+    <!-- Twitter Landing -->
+    <string name="title_activity_twitter_landing">Timeline</string>
 </resources>

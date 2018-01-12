@@ -6,6 +6,8 @@ import me.santiagoalvarez.kogiaplicanttest.home.MainActivity
 import me.santiagoalvarez.kogiaplicanttest.init.splash.SplashActivity
 import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivity
 import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivityModule
+import me.santiagoalvarez.kogiaplicanttest.twitter.feed.TwitterLandingActivity
+import me.santiagoalvarez.kogiaplicanttest.twitter.feed.TwitterLandingModule
 import me.santiagoalvarez.kogiaplicanttest.twitter.login.TwitterLoginActivity
 import me.santiagoalvarez.kogiaplicanttest.twitter.login.TwitterLoginModule
 
@@ -31,4 +33,8 @@ abstract class ActivityBuilder {
     @ActivityScoped
     @ContributesAndroidInjector(modules = [TwitterLoginModule::class])
     internal abstract fun bindTwitterLoginActivity(): TwitterLoginActivity
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = [TwitterLandingModule::class])
+    internal abstract fun bindTwitterLandingActivity(): TwitterLandingActivity
 }

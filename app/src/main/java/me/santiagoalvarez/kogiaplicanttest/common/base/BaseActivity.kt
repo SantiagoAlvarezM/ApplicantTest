@@ -3,7 +3,9 @@ package me.santiagoalvarez.kogiaplicanttest.common.base
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import dagger.android.support.DaggerAppCompatActivity
+import me.santiagoalvarez.kogiaplicanttest.R
 import me.santiagoalvarez.kogiaplicanttest.navigation.Navigator
 import javax.inject.Inject
 
@@ -21,7 +23,12 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        navigator = Navigator(this, savedInstanceState, android.R.id.content, navigationListener)
+        navigator = Navigator(this, savedInstanceState, R.id.content, navigationListener)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        navigator.saveInstanceState(outState)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

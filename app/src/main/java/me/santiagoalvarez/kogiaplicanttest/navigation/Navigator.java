@@ -26,6 +26,7 @@ public class Navigator {
     private static final String TAG = "Navigator";
 
     private static String MARKERS = "navigation.navigator.markers";
+    private static String PENDING_NAVIGATIONS = "navigation.navigator.pending_navigations";
 
     private FragmentActivity activity;
     private FragmentManager fragmentManager;
@@ -33,11 +34,12 @@ public class Navigator {
     private NavigationListener listener;
 
     private LinkedList<Integer> flowMarkers;
+    private Bundle pendingNavigations;
 
     /**
      * Interface that listen for navigation events.
      */
-    public static interface NavigationListener {
+    public interface NavigationListener {
         /**
          * Event called before the navigator action is executed.
          *
@@ -77,6 +79,7 @@ public class Navigator {
         } else {
             flowMarkers = Lists.newLinkedList((List<Integer>) savedInstanceState.get(MARKERS));
         }
+        restorePendingNavigations(savedInstanceState);
         fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
 
             @Override
@@ -92,6 +95,14 @@ public class Navigator {
         });
     }
 
+    private void restorePendingNavigations(Bundle savedInstanceState) {
+        if (savedInstanceState != null && savedInstanceState.containsKey(PENDING_NAVIGATIONS)) {
+            pendingNavigations = savedInstanceState.getBundle(PENDING_NAVIGATIONS);
+        } else {
+            pendingNavigations = new Bundle();
+        }
+    }
+
     /**
      * Store the internal state of the navigator to be able to restore it in the future.
      *
@@ -99,6 +110,7 @@ public class Navigator {
      */
     public void saveInstanceState(Bundle outState) {
         outState.putSerializable(MARKERS, flowMarkers);
+        outState.putBundle(PENDING_NAVIGATIONS, pendingNavigations);
     }
 
     /**
@@ -124,6 +136,25 @@ public class Navigator {
             transaction.addToBackStack(tag);
         }
         return transaction.replace(containerId, fragment, tag).commitAllowingStateLoss();
+    }
+
+    /**
+     * Enable navigation between fragments
+     *
+     * @param fragment - target of the navigation
+     */
+    public FragmentNavigationEntry.Builder to(Fragment fragment) {
+        checkState(!fragment.isAdded(), "The fragment was already added to an activity before calling the navigator.");
+        return new FragmentNavigationEntry.Builder(this, fragment);
+    }
+
+    /**
+     * Enable navigation between activities
+     *
+     * @param intent - target of the navigation
+     */
+    public IntentNavigationEntry.Builder to(Intent intent) {
+        return new IntentNavigationEntry.Builder(this, intent);
     }
 
     /**
@@ -227,6 +258,67 @@ public class Navigator {
      */
     public void navigateOneStepBack() {
         fragmentManager.popBackStack();
+    }
+
+    /**
+     * Store a {@link NavigationEntry} as a pending navigation action, replacing
+     * any existing value for the given navigationId.
+     *
+     * @param navigationId identifier associated with the navigation action
+     * @param entry        pending navigation action
+     */
+    public void addPendingNavigation(String navigationId, NavigationEntry<?> entry) {
+        pendingNavigations.putParcelable(navigationId, entry);
+    }
+
+    /**
+     * Execute a pending navigation action associated with the given navigationId if any exist.
+     *
+     * @param navigationId identifier associated with the navigation action
+     * @param forceRemove  if true, force the pending @NavigationEntry to be removed after executed,
+     *                     even if it is sticky.
+     *                     If false, force the pending @NavigationEntry to be kept.
+     *                     If null, it is removed by default unless the @NavigationEntry is flagged as sticky.
+     */
+    public void executePendingNavigation(String navigationId, Boolean forceRemove) {
+        NavigationEntry<?> parcelable = pendingNavigations.getParcelable(navigationId);
+        boolean forcingRemove;
+
+        // if forceRemove is not present, it is overrided by NavigationEntry sticky value
+        if (forceRemove == null) {
+            forcingRemove = parcelable != null && !parcelable.isSticky();
+        } else {
+            forcingRemove = forceRemove;
+        }
+
+        if (forcingRemove) {
+            navigateTo(removePendingNavigation(navigationId));
+        } else {
+            navigateTo(parcelable);
+        }
+    }
+
+    /**
+     * Execute a pending navigation action associated with the given navigationId if any exist,
+     * and remove the @NavigationEntry if it is no sticky.
+     *
+     * @param navigationId identifier associated with the navigation action
+     */
+    public void executePendingNavigation(String navigationId) {
+        executePendingNavigation(navigationId, null);
+    }
+
+    /**
+     * Removes a pending navigation action associated with the given navigationId.
+     *
+     * @param navigationId identifier associated with the navigation action
+     * @return Returns the value that was stored under the navigationId, or null if there
+     * was no such navigationId.
+     */
+    public NavigationEntry<?> removePendingNavigation(String navigationId) {
+        NavigationEntry<?> parcelable = pendingNavigations.getParcelable(navigationId);
+        pendingNavigations.remove(navigationId);
+        return parcelable;
     }
 
     /**

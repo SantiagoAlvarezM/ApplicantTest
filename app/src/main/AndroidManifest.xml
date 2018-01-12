@@ -44,6 +44,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="me.santiagoalvarez.kogiaplicanttest.home.MainActivity" />
         </activity>
+        <activity
+            android:name=".twitter.feed.TwitterLandingActivity"
+            android:label="@string/title_activity_twitter_landing"
+            android:parentActivityName=".home.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.santiagoalvarez.kogiaplicanttest.home.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

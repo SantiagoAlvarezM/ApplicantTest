@@ -37,7 +37,8 @@ class TwitterLandingFragment @Inject constructor() : DaggerFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rVTwitterLandind.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rVTwitterLandind.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rVTwitterLandind.adapter = timelineAdapter
     }
 }

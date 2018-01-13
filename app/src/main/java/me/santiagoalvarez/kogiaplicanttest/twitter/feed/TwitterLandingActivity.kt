@@ -32,8 +32,9 @@ class TwitterLandingActivity : BaseActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val twitterLandingFragment = supportFragmentManager.findFragmentById(R.id.content) as TwitterLandingFragment? ?:
-                twitterLandingFragmentProvider.get()
+        val twitterLandingFragment =
+                supportFragmentManager.findFragmentById(R.id.content) as TwitterLandingFragment? ?:
+                        twitterLandingFragmentProvider.get()
 
         FragmentNavigationEntry.Builder(navigator, twitterLandingFragment)
                 .noPush()

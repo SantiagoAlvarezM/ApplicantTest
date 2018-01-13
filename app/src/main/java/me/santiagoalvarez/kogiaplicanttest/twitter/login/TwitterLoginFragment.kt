@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 
 /**
- * A placeholder fragment containing a simple view.
+ * @author santiagoalvarez
  */
 @ActivityScoped
 class TwitterLoginFragment @Inject constructor() : DaggerFragment(), TwitterLoginContract.View {

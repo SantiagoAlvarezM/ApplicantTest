@@ -14,14 +14,16 @@ import javax.inject.Inject
 
 class KogiApplication : DaggerApplication() {
 
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerApplicationComponent.builder().application(this).build()
-    }
-
     @Inject lateinit var twitterConfig: TwitterConfig
 
     override fun onCreate() {
         super.onCreate()
         Twitter.initialize(twitterConfig)
     }
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerApplicationComponent.builder().application(this).build()
+    }
+
+
 }

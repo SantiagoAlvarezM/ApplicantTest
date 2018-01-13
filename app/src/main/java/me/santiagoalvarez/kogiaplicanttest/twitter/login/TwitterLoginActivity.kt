@@ -4,14 +4,15 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import dagger.Lazy
 import me.santiagoalvarez.kogiaplicanttest.R
 import me.santiagoalvarez.kogiaplicanttest.common.base.BaseActivity
 import me.santiagoalvarez.kogiaplicanttest.navigation.FragmentNavigationEntry
 import javax.inject.Inject
 
-
+/**
+ * @author santiagoalvarez
+ */
 class TwitterLoginActivity : BaseActivity(), TwitterLoginFragment.OnLoginListener {
 
     companion object {
@@ -27,8 +28,9 @@ class TwitterLoginActivity : BaseActivity(), TwitterLoginFragment.OnLoginListene
         super.onCreate(savedInstanceState)
         setContentView(R.layout.content_twitter_login)
 
-        twitterLoginFrg = supportFragmentManager.findFragmentById(R.id.content) as TwitterLoginFragment? ?:
-                twitterLoginFragmentProvider.get()
+        twitterLoginFrg =
+                supportFragmentManager.findFragmentById(R.id.content) as TwitterLoginFragment? ?:
+                        twitterLoginFragmentProvider.get()
 
         FragmentNavigationEntry.Builder(navigator, twitterLoginFrg)
                 .noPush()

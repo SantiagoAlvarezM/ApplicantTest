@@ -5,10 +5,13 @@ import android.content.Context
 import android.util.Log
 import com.twitter.sdk.android.core.DefaultLogger
 import com.twitter.sdk.android.core.TwitterConfig
+import com.twitter.sdk.android.core.TwitterCore
+import com.twitter.sdk.android.core.TwitterSession
 import dagger.Module
 import dagger.Provides
 import me.santiagoalvarez.kogiaplicanttest.auth.AccountType
-import me.santiagoalvarez.kogiaplicanttest.auth.AuthenticationManager
+import me.santiagoalvarez.kogiaplicanttest.auth.ProfileManager
+import me.santiagoalvarez.kogiaplicanttest.auth.ProfileManagerImpl
 import me.santiagoalvarez.kogiaplicanttest.common.base.BaseActivity
 import me.santiagoalvarez.kogiaplicanttest.navigation.Navigator
 import me.santiagoalvarez.kogiaplicanttest.twitter.login.TwitterLoginActivity
@@ -24,6 +27,9 @@ class ApplicationModule {
     fun providesContext(application: Application): Context = application
 
     @Provides
+    fun providesProfileManager(): ProfileManager = ProfileManagerImpl()
+
+    @Provides
     fun providesTwitterConfig(application: Application): TwitterConfig
             = TwitterConfig.Builder(application)
             .logger(DefaultLogger(Log.DEBUG))
@@ -31,13 +37,17 @@ class ApplicationModule {
             .build()
 
     @Provides
-    fun providesNavigationListener(context: Context, authenticationManager: AuthenticationManager): Navigator.NavigationListener
+    fun providesTwitterSession(): TwitterSession =
+            TwitterCore.getInstance().sessionManager.activeSession
+
+    @Provides
+    fun providesNavigationListener(context: Context, profileManager: ProfileManager): Navigator.NavigationListener
             = Navigator.NavigationListener { navigator, entry ->
-        if (entry.isLoginRequired(AccountType.TWITTER) && !authenticationManager.isAuthenticated(AccountType.TWITTER)) {
+        if (entry.isLoginRequired(AccountType.TWITTER) && !profileManager.isAuthenticated(AccountType.TWITTER)) {
             navigator.addPendingNavigation(BaseActivity.REQUEST_SIGNIN.toString(), entry)
             navigator.to(TwitterLoginActivity.createIntent(context)).withRequestCode(BaseActivity.REQUEST_SIGNIN).navigate()
             return@NavigationListener true
-        } else if (entry.isLoginRequired(AccountType.INSTAGRAM) && !authenticationManager.isAuthenticated(AccountType.INSTAGRAM)) {
+        } else if (entry.isLoginRequired(AccountType.INSTAGRAM) && !profileManager.isAuthenticated(AccountType.INSTAGRAM)) {
             //TODO("not implemented")
             return@NavigationListener false
         }

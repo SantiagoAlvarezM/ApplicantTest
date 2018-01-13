@@ -10,7 +10,7 @@ import me.santiagoalvarez.kogiaplicanttest.auth.ProfileManager
 import me.santiagoalvarez.kogiaplicanttest.di.FragmentScoped
 
 /**
- * @author santiagoalvarez.
+ * @author santiagoalvarez
  */
 @Module
 abstract class TwitterLandingModule {
@@ -24,7 +24,9 @@ abstract class TwitterLandingModule {
 
         @Provides
         @JvmStatic
-        fun providesTimeline(profileManager: ProfileManager): Timeline<Tweet>
-                = UserTimeline.Builder().screenName(profileManager.fetchTwitterSession().userName).build()
+        fun providesTimeline(profileManager: ProfileManager): Timeline<Tweet> =
+                UserTimeline.Builder()
+                        .screenName(profileManager.getTwitterUsername())
+                        .build()
     }
 }

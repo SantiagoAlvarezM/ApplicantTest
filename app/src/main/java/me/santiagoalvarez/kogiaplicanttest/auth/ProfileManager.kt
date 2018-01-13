@@ -1,18 +1,29 @@
 package me.santiagoalvarez.kogiaplicanttest.auth
 
-import com.twitter.sdk.android.core.TwitterCore
 import com.twitter.sdk.android.core.TwitterSession
-import javax.inject.Inject
 
 /**
  * Manager in charge of interaction with Instagram & Twitter services
  * @author santiagoalvarez
  */
-class ProfileManager @Inject constructor() {
+interface ProfileManager {
 
     /**
-     * Get the [TwitterSession]
+     * Determines if user is authenticated for a given [AccountType]
+     * @param accountType
+     * @return true if is authenticated, false otherwise
+     */
+    fun isAuthenticated(accountType: AccountType): Boolean
+
+    /**
+     * Get the active [TwitterSession]
+     * @return [TwitterSession]
      */
     fun fetchTwitterSession(): TwitterSession
-            = TwitterCore.getInstance().sessionManager.activeSession
+
+    /**
+     * Get the Twitter username from [TwitterSession]
+     * @return [String] username
+     */
+    fun getTwitterUsername(): String
 }

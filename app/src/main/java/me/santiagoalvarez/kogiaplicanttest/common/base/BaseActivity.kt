@@ -3,7 +3,6 @@ package me.santiagoalvarez.kogiaplicanttest.common.base
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import dagger.android.support.DaggerAppCompatActivity
 import me.santiagoalvarez.kogiaplicanttest.R
 import me.santiagoalvarez.kogiaplicanttest.navigation.Navigator
@@ -15,7 +14,7 @@ import javax.inject.Inject
 abstract class BaseActivity : DaggerAppCompatActivity() {
 
     companion object {
-        public val REQUEST_SIGNIN = 999
+        val REQUEST_SIGNIN = 999
     }
 
     protected lateinit var navigator: Navigator

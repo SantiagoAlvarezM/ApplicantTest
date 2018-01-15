@@ -1,9 +1,5 @@
 package me.santiagoalvarez.kogiaplicanttest.di
 
-import java.lang.annotation.Documented
-import java.lang.annotation.Retention
-import java.lang.annotation.RetentionPolicy
-
 import javax.inject.Scope
 
 /**
@@ -12,7 +8,7 @@ import javax.inject.Scope
  * scope to be used by all fragment components. Additionally, a component with a specific scope
  * cannot have a sub component with the same scope.
  */
-@Documented
+@kotlin.annotation.MustBeDocumented
 @Scope
-@Retention(RetentionPolicy.RUNTIME)
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 annotation class ActivityScoped

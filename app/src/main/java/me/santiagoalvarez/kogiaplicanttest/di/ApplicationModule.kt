@@ -3,10 +3,7 @@ package me.santiagoalvarez.kogiaplicanttest.di
 import android.app.Application
 import android.content.Context
 import android.util.Log
-import com.twitter.sdk.android.core.DefaultLogger
-import com.twitter.sdk.android.core.TwitterConfig
-import com.twitter.sdk.android.core.TwitterCore
-import com.twitter.sdk.android.core.TwitterSession
+import com.twitter.sdk.android.core.*
 import dagger.Module
 import dagger.Provides
 import me.santiagoalvarez.kogiaplicanttest.auth.AccountType
@@ -37,17 +34,18 @@ class ApplicationModule {
             .build()
 
     @Provides
-    fun providesTwitterSession(): TwitterSession =
-            TwitterCore.getInstance().sessionManager.activeSession
-
-    @Provides
-    fun providesNavigationListener(context: Context, profileManager: ProfileManager): Navigator.NavigationListener
+    fun providesNavigationListener(context: Context, profileManager: ProfileManager):
+            Navigator.NavigationListener
             = Navigator.NavigationListener { navigator, entry ->
-        if (entry.isLoginRequired(AccountType.TWITTER) && !profileManager.isAuthenticated(AccountType.TWITTER)) {
+        if (entry.isLoginRequired(AccountType.TWITTER) &&
+                !profileManager.isAuthenticated(AccountType.TWITTER)) {
             navigator.addPendingNavigation(BaseActivity.REQUEST_SIGNIN.toString(), entry)
-            navigator.to(TwitterLoginActivity.createIntent(context)).withRequestCode(BaseActivity.REQUEST_SIGNIN).navigate()
+            navigator.to(TwitterLoginActivity.createIntent(context))
+                    .withRequestCode(BaseActivity.REQUEST_SIGNIN)
+                    .navigate()
             return@NavigationListener true
-        } else if (entry.isLoginRequired(AccountType.INSTAGRAM) && !profileManager.isAuthenticated(AccountType.INSTAGRAM)) {
+        } else if (entry.isLoginRequired(AccountType.INSTAGRAM) &&
+                !profileManager.isAuthenticated(AccountType.INSTAGRAM)) {
             //TODO("not implemented")
             return@NavigationListener false
         }

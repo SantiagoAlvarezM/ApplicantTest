@@ -27,7 +27,7 @@ class ProfileManagerImpl @Inject constructor() : ProfileManager {
 
     override fun getTwitterSession(): TwitterSession = fetchSessionManager().activeSession
 
-    override fun getTwitterUsername(): String = fetchSessionManager().activeSession.userName
+    override fun getTwitterUsername(): String? = fetchSessionManager().activeSession.userName
 
     private fun fetchSessionManager(): SessionManager<TwitterSession> =
             TwitterCore.getInstance().sessionManager

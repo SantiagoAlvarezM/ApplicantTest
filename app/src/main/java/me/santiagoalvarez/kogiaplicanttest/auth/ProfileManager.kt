@@ -31,5 +31,5 @@ interface ProfileManager {
      * Get the Twitter username from [TwitterSession.userName]
      * @return [String] username
      */
-    fun getTwitterUsername(): String
+    fun getTwitterUsername(): String?
 }

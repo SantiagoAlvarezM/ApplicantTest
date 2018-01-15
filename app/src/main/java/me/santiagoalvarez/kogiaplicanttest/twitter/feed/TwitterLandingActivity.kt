@@ -7,6 +7,7 @@ import dagger.Lazy
 import kotlinx.android.synthetic.main.activity_twitter_landing.*
 import me.santiagoalvarez.kogiaplicanttest.R
 import me.santiagoalvarez.kogiaplicanttest.auth.AccountType
+import me.santiagoalvarez.kogiaplicanttest.auth.ProfileManager
 import me.santiagoalvarez.kogiaplicanttest.common.base.BaseActivity
 import me.santiagoalvarez.kogiaplicanttest.navigation.AuthenticationRequired
 import me.santiagoalvarez.kogiaplicanttest.navigation.FragmentNavigationEntry
@@ -25,6 +26,7 @@ class TwitterLandingActivity : BaseActivity() {
     }
 
     @Inject lateinit var twitterLandingFragmentProvider: Lazy<TwitterLandingFragment>
+    @Inject lateinit var profileManager: ProfileManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,7 @@ class TwitterLandingActivity : BaseActivity() {
 
         FragmentNavigationEntry.Builder(navigator, twitterLandingFragment)
                 .noPush()
+                .withTitle(getString(R.string.title_activity_twitter_landing, profileManager.getTwitterUsername() ?: ""))
                 .navigate()
     }
 

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.common.collect.Lists;
@@ -177,6 +178,10 @@ public class Navigator {
         Integer containerId = entry.getContainerId();
         if (containerId == null) {
             containerId = layoutId;
+        }
+
+        if (((AppCompatActivity) activity).getSupportActionBar() != null) {
+            ((AppCompatActivity) activity).getSupportActionBar().setTitle(entry.getTitle());
         }
 
         if (entry.isNoPush()) {

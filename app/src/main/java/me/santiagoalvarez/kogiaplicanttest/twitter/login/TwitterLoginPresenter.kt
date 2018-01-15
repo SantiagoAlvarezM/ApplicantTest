@@ -11,8 +11,7 @@ import javax.inject.Inject
  * @author santiagoalvarez
  */
 @ActivityScoped
-class TwitterLoginPresenter @Inject constructor() :
-        TwitterLoginContract.Presenter {
+class TwitterLoginPresenter @Inject constructor() : TwitterLoginContract.Presenter {
 
     var view: TwitterLoginContract.View? = null
 

@@ -7,14 +7,12 @@ import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
-import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import me.santiagoalvarez.kogiaplicanttest.R
 import me.santiagoalvarez.kogiaplicanttest.auth.AccountType
 import me.santiagoalvarez.kogiaplicanttest.common.base.BaseActivity
 import me.santiagoalvarez.kogiaplicanttest.navigation.IntentNavigationEntry
-import me.santiagoalvarez.kogiaplicanttest.navigation.Navigator
 import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivity
 import me.santiagoalvarez.kogiaplicanttest.twitter.feed.TwitterLandingActivity
 

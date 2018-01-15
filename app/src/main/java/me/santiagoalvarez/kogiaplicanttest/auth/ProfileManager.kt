@@ -16,13 +16,19 @@ interface ProfileManager {
     fun isAuthenticated(accountType: AccountType): Boolean
 
     /**
+     * Close session on given [AccountType]
+     * @param accountType
+     */
+    fun closeSession(accountType: AccountType)
+
+    /**
      * Get the active [TwitterSession]
      * @return [TwitterSession]
      */
-    fun fetchTwitterSession(): TwitterSession
+    fun getTwitterSession(): TwitterSession
 
     /**
-     * Get the Twitter username from [TwitterSession]
+     * Get the Twitter username from [TwitterSession.userName]
      * @return [String] username
      */
     fun getTwitterUsername(): String

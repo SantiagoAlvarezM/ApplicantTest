@@ -14,11 +14,12 @@ import javax.inject.Inject
 abstract class BaseActivity : DaggerAppCompatActivity() {
 
     companion object {
-        val REQUEST_SIGNIN = 999
+        const val REQUEST_SIGNIN = 999
     }
 
     protected lateinit var navigator: Navigator
-    @Inject lateinit var navigationListener: Navigator.NavigationListener
+    @Inject
+    lateinit var navigationListener: Navigator.NavigationListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

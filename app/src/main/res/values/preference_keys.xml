@@ -2,4 +2,5 @@
 <resources>
     <string name="pref_key_account_instagram" translatable="false">logout_instagram</string>
     <string name="pref_key_account_twitter" translatable="false">logout_twitter</string>
+    <string name="pref_key_instagram_token" translatable="false">logout_twitter</string>
 </resources>

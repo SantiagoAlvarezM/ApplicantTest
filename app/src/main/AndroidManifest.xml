@@ -52,6 +52,26 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="me.santiagoalvarez.kogiaplicanttest.home.MainActivity" />
         </activity>
+        <activity
+            android:name=".instagram.login.InstagramLoginActivity"
+            android:label="@string/title_activity_instagram_login"
+            android:parentActivityName=".home.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.VIEW" />-->
+
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+                <!--<category android:name="android.intent.category.BROWSABLE" />-->
+
+                <!--<data-->
+                    <!--android:host="app.me.santiagoalvarez.kogiaplicanttest"-->
+                    <!--android:pathPrefix="/redirect"-->
+                    <!--android:scheme="http" />-->
+            <!--</intent-filter>-->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.santiagoalvarez.kogiaplicanttest.home.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

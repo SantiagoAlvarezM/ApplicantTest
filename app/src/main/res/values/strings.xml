@@ -3,6 +3,8 @@
     <string name="app_name">KogiAplicantTest</string>
     <string name="general_api_error">Something is not right… we apologize for it. Please try again later.</string>
     <string name="general_login_success">Success, you are logged in.</string>
+    <string name="general_login_fails">Login fails. Please try again later.</string>
+    <string name="general_login_denied">Login fails. Please Authorize this application access your account.</string>
 
     <!-- Dialogs -->
     <string name="dialog_positive_opt">OK</string>
@@ -41,4 +43,6 @@
 
     <!-- Twitter Landing -->
     <string name="title_activity_twitter_landing">%1$s\'s Timeline</string>
+    <string name="title_activity_instagram_login">InstagramLoginActivity</string>
+    <string name="action_settings">Settings</string>
 </resources>

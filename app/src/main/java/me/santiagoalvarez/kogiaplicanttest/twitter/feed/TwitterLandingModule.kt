@@ -26,7 +26,7 @@ abstract class TwitterLandingModule {
         @JvmStatic
         fun providesTimeline(profileManager: ProfileManager): Timeline<Tweet> =
                 UserTimeline.Builder()
-                        .screenName(profileManager.getTwitterUsername())
+                        .screenName(profileManager.getTwitterUsername() ?: "")
                         .build()
     }
 }

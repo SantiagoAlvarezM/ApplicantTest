@@ -28,7 +28,7 @@ class TwitterLoginActivity : BaseLoginActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_twitter_login)
+        setContentView(R.layout.base_activity_login)
 
         twitterLoginFrg =
                 supportFragmentManager.findFragmentById(R.id.content) as TwitterLoginFragment? ?:

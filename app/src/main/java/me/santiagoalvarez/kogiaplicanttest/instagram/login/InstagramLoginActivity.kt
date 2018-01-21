@@ -25,7 +25,7 @@ class InstagramLoginActivity : BaseLoginActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_instagram_login)
+        setContentView(R.layout.base_activity_login)
         val frag = supportFragmentManager.findFragmentById(R.id.content)
                 ?: instagramLoginFragmentProvider.get()
         FragmentNavigationEntry.Builder(navigator, frag)

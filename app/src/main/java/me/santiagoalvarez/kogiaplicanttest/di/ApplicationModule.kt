@@ -12,7 +12,7 @@ import me.santiagoalvarez.kogiaplicanttest.auth.ProfileManager
 import me.santiagoalvarez.kogiaplicanttest.auth.ProfileManagerImpl
 import me.santiagoalvarez.kogiaplicanttest.common.base.BaseActivity
 import me.santiagoalvarez.kogiaplicanttest.data.service.AuthInterceptor
-import me.santiagoalvarez.kogiaplicanttest.data.service.InstagramClient
+import me.santiagoalvarez.kogiaplicanttest.data.service.InstagramService
 import me.santiagoalvarez.kogiaplicanttest.instagram.login.InstagramConfig.INSTAGRAM_API_BASE_URL
 import me.santiagoalvarez.kogiaplicanttest.instagram.login.InstagramLoginActivity
 import me.santiagoalvarez.kogiaplicanttest.navigation.Navigator
@@ -46,7 +46,7 @@ class ApplicationModule {
             .build()
 
     @Provides
-    fun providesRetrofitInstagramClient(profileManager: ProfileManager): InstagramClient {
+    fun providesInstagramService(profileManager: ProfileManager): InstagramService {
         val okHttpClientBuilder = OkHttpClient.Builder()
         val authInterceptor = AuthInterceptor(profileManager.getInstagramAccessToken()!!)
         if (!okHttpClientBuilder.interceptors().contains(authInterceptor)) {
@@ -57,7 +57,7 @@ class ApplicationModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClientBuilder.build())
                 .build()
-                .create(InstagramClient::class.java)
+                .create(InstagramService::class.java)
     }
 
     @Provides

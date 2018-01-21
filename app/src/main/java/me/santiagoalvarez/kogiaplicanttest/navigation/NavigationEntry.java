@@ -67,6 +67,14 @@ public abstract class NavigationEntry<T> implements Parcelable {
         return target;
     }
 
+    public @Nullable
+    AccountType getLoginType() {
+        if (loginRequired == null) {
+            return null;
+        }
+        return loginRequired.accountType;
+    }
+
     public CustomAnimations getAnimations() {
         return animations;
     }

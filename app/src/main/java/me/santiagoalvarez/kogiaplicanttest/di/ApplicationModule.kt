@@ -63,14 +63,16 @@ class ApplicationModule {
     @Provides
     fun providesNavigationListener(context: Context, profileManager: ProfileManager):
             Navigator.NavigationListener = Navigator.NavigationListener { navigator, entry ->
-        if (entry.isLoginRequired(AccountType.TWITTER) &&
+        if (AccountType.TWITTER == entry.loginType &&
+                entry.isLoginRequired(AccountType.TWITTER) &&
                 !profileManager.isAuthenticated(AccountType.TWITTER)) {
             navigator.addPendingNavigation(BaseActivity.REQUEST_SIGNIN.toString(), entry)
             navigator.to(TwitterLoginActivity.createIntent(context))
                     .withRequestCode(BaseActivity.REQUEST_SIGNIN)
                     .navigate()
             return@NavigationListener true
-        } else if (entry.isLoginRequired(AccountType.INSTAGRAM) &&
+        } else if (AccountType.INSTAGRAM == entry.loginType &&
+                entry.isLoginRequired(AccountType.INSTAGRAM) &&
                 !profileManager.isAuthenticated(AccountType.INSTAGRAM)) {
             navigator.addPendingNavigation(BaseActivity.REQUEST_SIGNIN.toString(), entry)
             navigator.to(InstagramLoginActivity.createIntent(context))

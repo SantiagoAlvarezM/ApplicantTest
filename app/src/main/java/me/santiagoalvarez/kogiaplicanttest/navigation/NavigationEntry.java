@@ -8,8 +8,6 @@ import java.io.Serializable;
 
 import me.santiagoalvarez.kogiaplicanttest.auth.AccountType;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 /**
  * Defines a navigation transaction
  *
@@ -192,7 +190,10 @@ public abstract class NavigationEntry<T> implements Parcelable {
         private boolean sticky = false;
 
         Builder(Navigator navigator, P target) {
-            this.target = checkNotNull(target);
+            if (target == null) {
+                throw new NullPointerException("target can't be null");
+            }
+            this.target = target;
             this.navigator = navigator;
         }
 
@@ -202,8 +203,9 @@ public abstract class NavigationEntry<T> implements Parcelable {
          * Builds and executes the navigation entry.
          */
         public void navigate() {
-            checkNotNull(navigator,
-                    "The navigator instance is null when trying to execute a navigation entry.");
+            if (navigator == null) {
+                throw new NullPointerException("The navigator instance is null when trying to execute a navigation entry.");
+            }
             navigator.navigateTo(build());
         }
 

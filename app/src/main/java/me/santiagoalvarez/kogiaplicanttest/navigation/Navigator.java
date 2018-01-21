@@ -9,12 +9,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.google.common.collect.Lists;
-
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import static com.google.common.base.Preconditions.checkState;
 
 /**
  * Class in charge of the navigation between fragments and activities
@@ -76,9 +73,9 @@ public class Navigator {
         this.layoutId = containerId;
         this.fragmentManager = activity.getSupportFragmentManager();
         if (savedInstanceState == null || savedInstanceState.get(MARKERS) == null) {
-            flowMarkers = Lists.newLinkedList();
+            flowMarkers = new LinkedList<>();
         } else {
-            flowMarkers = Lists.newLinkedList((List<Integer>) savedInstanceState.get(MARKERS));
+            flowMarkers = new LinkedList<>((List<Integer>) savedInstanceState.get(MARKERS));
         }
         restorePendingNavigations(savedInstanceState);
         fragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
@@ -86,7 +83,7 @@ public class Navigator {
             @Override
             public void onBackStackChanged() {
                 //This is ugly, but we don't have a way to determine which was the entry that was removed!
-                List<Integer> backStackEntries = Lists.newArrayList();
+                List<Integer> backStackEntries = new ArrayList<>();
                 for (int j = 0; j < fragmentManager.getBackStackEntryCount(); j++) {
                     FragmentManager.BackStackEntry entry = fragmentManager.getBackStackEntryAt(j);
                     backStackEntries.add(entry.getId());
@@ -145,7 +142,9 @@ public class Navigator {
      * @param fragment - target of the navigation
      */
     public FragmentNavigationEntry.Builder to(Fragment fragment) {
-        checkState(!fragment.isAdded(), "The fragment was already added to an activity before calling the navigator.");
+        if (!fragment.isAdded()) {
+            throw new IllegalStateException("The fragment was already added to an activity before calling the navigator.");
+        }
         return new FragmentNavigationEntry.Builder(this, fragment);
     }
 
@@ -189,8 +188,10 @@ public class Navigator {
         } else {
             if (entry.isSubFlow()) {
                 Log.d(TAG, "navigateTo: Starting subflow from fragment: " + target.getClass().getSimpleName());
-                checkState(flowMarkers.isEmpty(),
-                        "You can only have one subflow. Nested subflows are not supported at the moment.");
+                if (flowMarkers.isEmpty()) {
+                    throw new IllegalStateException("You can only have one subflow. Nested subflows are not supported at the moment.");
+                }
+
                 flowMarkers.add(pushFragment(containerId, target, null, true, animations));
             } else {
                 pushFragment(containerId, target, tag, true, animations);

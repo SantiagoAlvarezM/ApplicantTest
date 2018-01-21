@@ -11,7 +11,6 @@ import android.preference.PreferenceFragment
 import android.preference.PreferenceScreen
 import android.view.MenuItem
 import android.view.View
-import com.google.common.base.Preconditions
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -68,8 +67,9 @@ class GeneralSettingsFragment @Inject constructor() : PreferenceFragment(),
     override fun onAttach(context: Context?) {
         AndroidInjection.inject(this)
         super.onAttach(context)
-        Preconditions.checkArgument(context is PreferenceInteractionListener,
-                "Activity must implement PreferenceInteractionListener")
+        check(context is PreferenceInteractionListener) {
+            "Activity must implement PreferenceInteractionListener"
+        }
         interactionListener = context as PreferenceInteractionListener
     }
 

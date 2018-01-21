@@ -63,9 +63,6 @@ dependencies {
     implementation 'android.arch.paging:runtime:1.0.0-alpha4-1'
     implementation "android.arch.lifecycle:common-java8:$arch_components"// Java8 for Lifecycles
 
-    // Guava
-    implementation "com.google.guava:guava:$guava_version"
-
     // Dagger
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"

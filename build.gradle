@@ -30,7 +30,6 @@ ext {
     kotlin_version = '1.2.20'
     support_library_version = '27.0.2'
     arch_components = '1.0.0'
-    guava_version = '23.6-android'
     dagger_version = '2.14.1'
     retrofit_version = '2.3.0'
     anko_version = '0.10.4'

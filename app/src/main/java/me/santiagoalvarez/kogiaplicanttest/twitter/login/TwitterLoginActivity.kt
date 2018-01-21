@@ -6,14 +6,16 @@ import android.content.Intent
 import android.os.Bundle
 import dagger.Lazy
 import me.santiagoalvarez.kogiaplicanttest.R
+import me.santiagoalvarez.kogiaplicanttest.auth.LoginListener
 import me.santiagoalvarez.kogiaplicanttest.common.base.BaseActivity
+import me.santiagoalvarez.kogiaplicanttest.common.base.BaseLoginActivity
 import me.santiagoalvarez.kogiaplicanttest.navigation.FragmentNavigationEntry
 import javax.inject.Inject
 
 /**
  * @author santiagoalvarez
  */
-class TwitterLoginActivity : BaseActivity(), TwitterLoginFragment.OnLoginListener {
+class TwitterLoginActivity : BaseLoginActivity() {
 
     companion object {
         fun createIntent(context: Context): Intent {
@@ -26,7 +28,7 @@ class TwitterLoginActivity : BaseActivity(), TwitterLoginFragment.OnLoginListene
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.content_twitter_login)
+        setContentView(R.layout.activity_twitter_login)
 
         twitterLoginFrg =
                 supportFragmentManager.findFragmentById(R.id.content) as TwitterLoginFragment? ?:
@@ -40,12 +42,5 @@ class TwitterLoginActivity : BaseActivity(), TwitterLoginFragment.OnLoginListene
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         twitterLoginFrg.onActivityResult(requestCode, resultCode, data)
-    }
-
-    override fun finishActivity(withResultOk: Boolean) {
-        if (withResultOk) {
-            setResult(Activity.RESULT_OK)
-        }
-        finish()
     }
 }

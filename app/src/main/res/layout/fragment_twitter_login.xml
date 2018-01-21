@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:padding="@dimen/activity_horizontal_margin"
     tools:context="me.santiagoalvarez.kogiaplicanttest.twitter.login.TwitterLoginFragment"
-    tools:showIn="@layout/content_twitter_login">
+    tools:showIn="@layout/activity_twitter_login">
 
     <ImageView
         android:id="@+id/iVTwitterLoginLogo"

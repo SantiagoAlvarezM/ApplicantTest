@@ -32,4 +32,14 @@ interface ProfileManager {
      * @return [String] username
      */
     fun getTwitterUsername(): String?
+
+    /**
+     * Get the AccessToken used for Instagram request
+     */
+    fun getInstagramAccessToken(): String?
+
+    /**
+     * Save the Instagram AccessToken
+     */
+    fun saveInstagramAccessToken(token: String)
 }

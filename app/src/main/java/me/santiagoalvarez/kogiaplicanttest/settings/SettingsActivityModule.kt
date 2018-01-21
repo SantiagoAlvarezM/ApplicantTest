@@ -1,4 +1,4 @@
-package me.santiagoalvarez.kogiaplicanttest.preferences
+package me.santiagoalvarez.kogiaplicanttest.settings
 
 import android.content.Context
 import dagger.Binds
@@ -8,6 +8,7 @@ import dagger.android.ContributesAndroidInjector
 import me.santiagoalvarez.kogiaplicanttest.common.base.BaseActivity
 import me.santiagoalvarez.kogiaplicanttest.di.ActivityScoped
 import me.santiagoalvarez.kogiaplicanttest.di.FragmentScoped
+import me.santiagoalvarez.kogiaplicanttest.instagram.login.InstagramLoginActivity
 import me.santiagoalvarez.kogiaplicanttest.navigation.IntentNavigationEntry
 import me.santiagoalvarez.kogiaplicanttest.navigation.Navigator
 import me.santiagoalvarez.kogiaplicanttest.twitter.login.TwitterLoginActivity
@@ -20,7 +21,7 @@ abstract class SettingsActivityModule {
 
     @FragmentScoped
     @ContributesAndroidInjector
-    internal abstract fun generalPreferenceFragment(): GeneralPreferenceFragment
+    internal abstract fun generalPreferenceFragment(): GeneralSettingsFragment
 
     @ActivityScoped
     @Binds
@@ -31,9 +32,16 @@ abstract class SettingsActivityModule {
 
         @Provides
         @JvmStatic
-        fun providesTwitterLoginEntry(context: Context, navigator: Navigator): IntentNavigationEntry
-                = IntentNavigationEntry.Builder(navigator, TwitterLoginActivity.createIntent(context))
-                .withRequestCode(BaseActivity.REQUEST_SIGNIN)
-                .build()
+        fun providesTwitterLoginEntry(context: Context, navigator: Navigator): IntentNavigationEntry =
+                IntentNavigationEntry.Builder(navigator, TwitterLoginActivity.createIntent(context))
+                        .withRequestCode(BaseActivity.REQUEST_SIGNIN)
+                        .build()
+
+        @Provides
+        @JvmStatic
+        fun providesInstagramLoginEntry(context: Context, navigator: Navigator): IntentNavigationEntry =
+                IntentNavigationEntry.Builder(navigator, InstagramLoginActivity.createIntent(context))
+                        .withRequestCode(BaseActivity.REQUEST_SIGNIN)
+                        .build()
     }
 }

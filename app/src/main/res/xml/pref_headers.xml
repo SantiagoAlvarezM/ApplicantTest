@@ -2,7 +2,7 @@
 
     <!-- These settings headers are only used on tablets. -->
     <header
-        android:fragment="me.santiagoalvarez.kogiaplicanttest.preferences.GeneralPreferenceFragment"
+        android:fragment="me.santiagoalvarez.kogiaplicanttest.settings.GeneralSettingsFragment"
         android:icon="@drawable/ic_account_circle"
         android:title="@string/pref_title_accounts" />
 

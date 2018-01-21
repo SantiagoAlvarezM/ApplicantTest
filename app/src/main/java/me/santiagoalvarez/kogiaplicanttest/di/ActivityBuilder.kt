@@ -4,8 +4,6 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import me.santiagoalvarez.kogiaplicanttest.home.MainActivity
 import me.santiagoalvarez.kogiaplicanttest.init.splash.SplashActivity
-import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivity
-import me.santiagoalvarez.kogiaplicanttest.preferences.SettingsActivityModule
 import me.santiagoalvarez.kogiaplicanttest.instagram.login.InstagramLoginActivity
 import me.santiagoalvarez.kogiaplicanttest.instagram.login.InstagramLoginModule
 import me.santiagoalvarez.kogiaplicanttest.settings.SettingsActivity

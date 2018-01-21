@@ -1,4 +1,4 @@
-package me.santiagoalvarez.kogiaplicanttest.preferences
+package me.santiagoalvarez.kogiaplicanttest.settings
 
 import android.annotation.TargetApi
 import android.content.Context
@@ -10,18 +10,17 @@ import android.preference.PreferenceActivity
 import android.preference.PreferenceFragment
 import android.support.v4.app.NavUtils
 import android.view.MenuItem
-import dagger.Lazy
 import me.santiagoalvarez.kogiaplicanttest.R
 import me.santiagoalvarez.kogiaplicanttest.auth.AccountType
 import me.santiagoalvarez.kogiaplicanttest.common.base.BaseActivity
+import me.santiagoalvarez.kogiaplicanttest.instagram.login.InstagramLoginActivity
 import me.santiagoalvarez.kogiaplicanttest.twitter.login.TwitterLoginActivity
-import javax.inject.Inject
 
 /**
 @author santiagoalvarez
  */
 class SettingsActivity : DaggerAppCompatPreferenceActivity(),
-        GeneralPreferenceFragment.PreferenceInteractionListener {
+        GeneralSettingsFragment.PreferenceInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +45,8 @@ class SettingsActivity : DaggerAppCompatPreferenceActivity(),
                         BaseActivity.REQUEST_SIGNIN)
             }
             AccountType.INSTAGRAM -> {
-                TODO("not implemented yet")
+                startActivityForResult(InstagramLoginActivity.createIntent(this),
+                        BaseActivity.REQUEST_SIGNIN)
             }
         }
     }
@@ -72,7 +72,7 @@ class SettingsActivity : DaggerAppCompatPreferenceActivity(),
      */
     override fun isValidFragment(fragmentName: String): Boolean {
         return PreferenceFragment::class.java.name == fragmentName
-                || GeneralPreferenceFragment::class.java.name == fragmentName
+                || GeneralSettingsFragment::class.java.name == fragmentName
     }
 
     companion object {

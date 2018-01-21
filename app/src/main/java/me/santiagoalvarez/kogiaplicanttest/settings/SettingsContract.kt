@@ -1,4 +1,4 @@
-package me.santiagoalvarez.kogiaplicanttest.preferences
+package me.santiagoalvarez.kogiaplicanttest.settings
 
 import me.santiagoalvarez.kogiaplicanttest.auth.AccountType
 import me.santiagoalvarez.kogiaplicanttest.common.base.BasePresenter

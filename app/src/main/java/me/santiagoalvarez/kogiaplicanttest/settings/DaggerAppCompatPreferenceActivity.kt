@@ -1,4 +1,4 @@
-package me.santiagoalvarez.kogiaplicanttest.preferences
+package me.santiagoalvarez.kogiaplicanttest.settings
 
 import android.content.res.Configuration
 import android.os.Bundle

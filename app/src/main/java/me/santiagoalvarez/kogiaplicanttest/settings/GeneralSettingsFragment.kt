@@ -1,4 +1,4 @@
-package me.santiagoalvarez.kogiaplicanttest.preferences
+package me.santiagoalvarez.kogiaplicanttest.settings
 
 import android.annotation.TargetApi
 import android.app.Fragment
@@ -30,20 +30,22 @@ import javax.inject.Inject
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 @ActivityScoped
-class GeneralPreferenceFragment @Inject constructor() : PreferenceFragment(),
+class GeneralSettingsFragment @Inject constructor() : PreferenceFragment(),
         HasFragmentInjector, SettingsContract.View {
 
     //region Dagger
     override fun fragmentInjector(): AndroidInjector<android.app.Fragment> = childFragmentInjector
 
-    @Inject lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
+    @Inject
+    lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
     //endregion
 
     interface PreferenceInteractionListener {
         fun onLoginRequest(accountType: AccountType)
     }
 
-    @Inject lateinit var presenter: SettingsContract.Presenter
+    @Inject
+    lateinit var presenter: SettingsContract.Presenter
     private lateinit var interactionListener: PreferenceInteractionListener
 
     private lateinit var twitterPreference: Preference

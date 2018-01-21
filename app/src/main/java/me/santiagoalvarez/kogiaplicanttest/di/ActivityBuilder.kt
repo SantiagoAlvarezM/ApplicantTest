@@ -4,6 +4,8 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import me.santiagoalvarez.kogiaplicanttest.home.MainActivity
 import me.santiagoalvarez.kogiaplicanttest.init.splash.SplashActivity
+import me.santiagoalvarez.kogiaplicanttest.instagram.feed.InstagramLandingActivity
+import me.santiagoalvarez.kogiaplicanttest.instagram.feed.InstagramLandingModule
 import me.santiagoalvarez.kogiaplicanttest.instagram.login.InstagramLoginActivity
 import me.santiagoalvarez.kogiaplicanttest.instagram.login.InstagramLoginModule
 import me.santiagoalvarez.kogiaplicanttest.settings.SettingsActivity
@@ -43,4 +45,8 @@ abstract class ActivityBuilder {
     @ActivityScoped
     @ContributesAndroidInjector(modules = [InstagramLoginModule::class])
     internal abstract fun bindInstagramLoginActivity(): InstagramLoginActivity
+
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = [InstagramLandingModule::class])
+    internal abstract fun bindInstagramLandingActivity(): InstagramLandingActivity
 }

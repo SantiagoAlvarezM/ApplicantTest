@@ -45,4 +45,11 @@
     <string name="title_activity_twitter_landing">%1$s\'s Timeline</string>
     <string name="title_activity_instagram_login">InstagramLoginActivity</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Instagram landing -->
+    <string name="title_activity_instagram_landing">InstagramLandingActivity</string>
+    <string name="menu_favorites">Favorites</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_uploads">Uploads</string>
+
 </resources>

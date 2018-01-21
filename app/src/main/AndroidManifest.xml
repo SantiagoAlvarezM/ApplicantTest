@@ -61,6 +61,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="me.santiagoalvarez.kogiaplicanttest.home.MainActivity" />
         </activity>
+        <activity
+            android:name=".instagram.feed.InstagramLandingActivity"
+            android:label="@string/title_activity_instagram_landing"
+            android:parentActivityName=".home.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="me.santiagoalvarez.kogiaplicanttest.home.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

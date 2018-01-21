@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import me.santiagoalvarez.kogiaplicanttest.R
 import me.santiagoalvarez.kogiaplicanttest.auth.AccountType
 import me.santiagoalvarez.kogiaplicanttest.common.base.BaseActivity
-import me.santiagoalvarez.kogiaplicanttest.instagram.login.InstagramLoginActivity
+import me.santiagoalvarez.kogiaplicanttest.instagram.feed.InstagramLandingActivity
 import me.santiagoalvarez.kogiaplicanttest.navigation.IntentNavigationEntry
 import me.santiagoalvarez.kogiaplicanttest.settings.SettingsActivity
 import me.santiagoalvarez.kogiaplicanttest.twitter.feed.TwitterLandingActivity
@@ -50,10 +50,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.nav_instagram -> {
-                //TODO replace entry by Instagram landing activity
-                IntentNavigationEntry.Builder(navigator, InstagramLoginActivity.createIntent(this))
-                        //.withLoginCheck(AccountType.INSTAGRAM)
-                        .withRequestCode(REQUEST_SIGNIN)
+                IntentNavigationEntry.Builder(navigator, InstagramLandingActivity.createIntent(this))
+                        .withLoginCheck(AccountType.INSTAGRAM)
                         .navigate()
             }
             R.id.nav_twitter -> {

@@ -1,2 +1,2 @@
-# ApplicantTest
-Company Applicant test
+# Instagram Browser
+Simple Instagram API exploration 

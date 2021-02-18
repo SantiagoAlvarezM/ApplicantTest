@@ -1,2 +1,2 @@
 # ApplicantTest
-Company Applicant test
+Simple Instagram API exploration 
